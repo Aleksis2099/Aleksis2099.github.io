@@ -20,18 +20,15 @@
             theme: {
                 extend: {
                     colors: {
-                    'wedding-cream': '#F5F5DC', // Crema Arena
-                    'wedding-navy': '#1A2B49',  // Azul Marino Profundo
-                    'wedding-gold': '#C5A059',  // Dorado Mate
-                    'wedding-gray': '#E5E4E2',  // Gris Perla
+                    'wedding-cream': '#F5F5DC',
+                    'wedding-navy': '#1A2B49',
+                    'wedding-gold': '#C5A059',
+                    'wedding-gray': '#E5E4E2',
                     },
                     fontFamily: {
                     'serif': ['"Playfair Display"', 'serif'],
                     'sans': ['"Montserrat"', 'sans-serif'],
                     },
-                    backgroundImage: {
-                    'palm-pattern': "url('https://www.transparenttextures.com/patterns/cubes.png')", // Textura sutil
-                    }
                 }
             }
         }
@@ -55,29 +52,6 @@
             transform: none;
         }
 
-        .gold-shimmer {
-            background: linear-gradient(to right, #C5A059 20%, #EDC967 40%, #EDC967 60%, #C5A059 80%);
-            background-size: 200% auto;
-            color: transparent;
-            background-clip: text;
-            -webkit-background-clip: text;
-            animation: shimmer 3s linear infinite;
-        }
-
-        @keyframes shimmer {
-            to {
-                background-position: 200% center;
-            }
-        }
-
-        /* Forma de arco para la foto */
-        .arch-image {
-            border-top-left-radius: 50% 100px;
-            border-top-right-radius: 50% 100px;
-            border-bottom-left-radius: 10px;
-            border-bottom-right-radius: 10px;
-        }
-
         /* Olas sutiles */
         .waves-divider {
             position: absolute;
@@ -93,19 +67,24 @@
             position: relative;
             display: block;
             width: calc(100% + 1.3px);
-            height: 60px;
+            height: 40px;
         }
 
         .waves-divider .shape-fill {
             fill: #F5F5DC;
         }
 
-        /* Hover effect: Imagen por defecto, video al pasar cursor */
+        /* Media container optimizado para móvil */
         .media-container {
             position: relative;
-            width: 640px;
-            height: 480px;
+            width: 100%;
+            max-width: 100%;
+            aspect-ratio: 4/3;
             cursor: pointer;
+            margin: 0 auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
         }
 
         .media-container img {
@@ -129,27 +108,51 @@
             z-index: 1;
         }
 
-        .media-container:hover img {
+        /* Mobile: tap para mostrar video */
+        .media-container.active img {
             opacity: 0;
+        }
+
+        /* Desktop: hover para mostrar video */
+        @media (hover: hover) and (min-width: 768px) {
+            .media-container:hover img {
+                opacity: 0;
+            }
+        }
+
+        /* Ajustes de texto para móvil */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 2.5rem;
+                line-height: 1.2;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+
+            .waves-divider svg {
+                height: 30px;
+            }
         }
     </style>
 </head>
 <body class="bg-wedding-cream text-wedding-navy font-sans antialiased overflow-x-hidden">
 
     <!-- SECCIÓN 1: HERO (Portada Misteriosa) -->
-    <header class="relative h-screen flex flex-col items-center justify-center bg-wedding-navy text-center px-4 overflow-hidden">
+    <header class="relative min-h-screen flex flex-col items-center justify-center bg-wedding-navy text-center px-6 py-12 overflow-hidden">
         <!-- Fondo decorativo sutil -->
         <div class="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center"></div>
 
         <div class="z-10 fade-in-section is-visible delay-300">
-            <i data-lucide="mail" class="w-16 h-16 text-wedding-gold mx-auto mb-6 opacity-80"></i>
-            <h1 class="font-serif text-5xl md:text-7xl text-wedding-cream tracking-wide mb-4">Celebración <br> <span class="text-wedding-gold italic">Especial</span></h1>
-            <div class="w-24 h-1 bg-wedding-gold mx-auto my-6"></div>
-            <p class="text-wedding-gray text-lg md:text-xl font-light tracking-widest uppercase">Una ocasión única que requiere tu discreción</p>
+            <i data-lucide="mail" class="w-12 h-12 md:w-16 md:h-16 text-wedding-gold mx-auto mb-6 opacity-80"></i>
+            <h1 class="hero-title font-serif text-wedding-cream tracking-wide mb-4">Celebración <br> <span class="text-wedding-gold italic">Especial</span></h1>
+            <div class="w-20 h-1 bg-wedding-gold mx-auto my-6"></div>
+            <p class="text-wedding-gray text-sm md:text-lg font-light tracking-wider uppercase px-4">Una ocasión única que requiere tu discreción</p>
         </div>
 
-        <div class="absolute bottom-10 animate-bounce">
-            <i data-lucide="chevron-down" class="text-wedding-gold w-8 h-8"></i>
+        <div class="absolute bottom-6 md:bottom-10 animate-bounce">
+            <i data-lucide="chevron-down" class="text-wedding-gold w-6 h-6 md:w-8 md:h-8"></i>
         </div>
 
         <!-- Olas decorativas abajo -->
@@ -161,36 +164,34 @@
     </header>
 
     <!-- SECCIÓN 2: LA REVELACIÓN (Foto) -->
-    <section class="py-20 px-4 bg-wedding-cream relative" id="reveal">
-        <div class="max-w-4xl mx-auto text-center fade-in-section">
-            <div class="relative inline-block mb-10 group">
-                <!-- Marco decorativo (Ajustado a rectángulo) -->
-                <div class="absolute -inset-4 border-2 border-wedding-gold opacity-50 rounded-xl transform translate-x-2 translate-y-2"></div>
-
-                <!-- CONTENEDOR: Imagen por defecto, video al hover -->
+    <section class="py-12 md:py-20 px-4 bg-wedding-cream relative" id="reveal">
+        <div class="max-w-2xl mx-auto text-center fade-in-section">
+            <div class="relative mb-8">
+                <!-- CONTENEDOR: Imagen por defecto, video al tap/hover -->
                 <div class="media-container">
                     <!-- Imagen (visible por defecto) -->
                     <img 
                       src="assets/Boda R & D Gemini.png" 
                       alt="Foto de los novios"
                     >
-                    
-                    <!-- Video HTML5 (se muestra al pasar cursor) -->
+
+                    <!-- Video HTML5 (se muestra al tap/hover) -->
                     <video 
                       src="assets/Video.mp4"
-                      style="border:0;"
                       muted
                       playsinline
+                      loop
                     ></video>
                 </div>
 
-                <div class="absolute -bottom-6 -right-6 bg-wedding-navy text-wedding-gold p-4 rounded-full shadow-lg z-20">
-                    <i data-lucide="heart" class="w-8 h-8 fill-current"></i>
+                <!-- Icono corazón -->
+                <div class="absolute -bottom-4 -right-4 bg-wedding-navy text-wedding-gold p-3 rounded-full shadow-lg z-20">
+                    <i data-lucide="heart" class="w-6 h-6 fill-current"></i>
                 </div>
             </div>
 
-            <h2 class="font-serif text-4xl md:text-5xl text-wedding-navy mb-6">Shhh... ¡Es una Sorpresa!</h2>
-            <p class="text-lg text-gray-700 leading-relaxed max-w-2xl mx-auto">
+            <h2 class="section-title font-serif text-wedding-navy mb-4 px-2">Shhh... ¡Es una Sorpresa!</h2>
+            <p class="text-base md:text-lg text-gray-700 leading-relaxed px-4">
                 Acompáñanos a celebrar el amor en una boda sorpresa inolvidable. 
                 Ellos creen que es una simple reunión, pero juntos haremos historia. 
                 <span class="font-serif italic text-wedding-gold font-bold">¡Tu complicidad es esencial!</span>
@@ -199,66 +200,61 @@
     </section>
 
     <!-- SECCIÓN 3: ALERTA DE CONFIDENCIALIDAD -->
-    <section class="py-12 px-4 bg-wedding-gray/30 border-y border-wedding-gold/20">
-        <div class="max-w-3xl mx-auto">
-            <div class="bg-wedding-gray rounded-xl p-8 border-2 border-dashed border-wedding-gold shadow-inner text-center fade-in-section">
+    <section class="py-8 md:py-12 px-4 bg-wedding-gray/30 border-y border-wedding-gold/20">
+        <div class="max-w-2xl mx-auto">
+            <div class="bg-wedding-gray rounded-xl p-6 md:p-8 border-2 border-dashed border-wedding-gold shadow-inner text-center fade-in-section">
                 <div class="flex justify-center mb-4">
                     <div class="bg-wedding-navy p-3 rounded-full">
-                    <i data-lucide="lock" class="text-wedding-gold w-8 h-8"></i>
+                    <i data-lucide="lock" class="text-wedding-gold w-6 h-6 md:w-8 md:h-8"></i>
                     </div>
                 </div>
-                <h3 class="font-serif text-2xl font-bold text-wedding-navy mb-4 uppercase tracking-widest">⚠️ Importante: Confidencialidad Total</h3>
-                <p class="text-gray-700 font-medium">
+                <h3 class="font-serif text-lg md:text-2xl font-bold text-wedding-navy mb-4 uppercase tracking-wide">⚠️ Confidencialidad Total</h3>
+                <p class="text-sm md:text-base text-gray-700 font-medium">
                     Este evento es una sorpresa absoluta para los novios.
                     Por favor, <span class="text-red-800 font-bold">NO publiques nada en redes sociales</span> donde ellos puedan verlo ni les comentes nada antes de la fecha.
                 </p>
-                <p class="mt-4 text-wedding-navy font-bold italic">¡Ayúdanos a guardar el secreto hasta el gran momento!</p>
+                <p class="mt-4 text-sm md:text-base text-wedding-navy font-bold italic">¡Ayúdanos a guardar el secreto hasta el gran momento!</p>
             </div>
         </div>
     </section>
 
     <!-- SECCIÓN 4: DETALLES -->
-    <section class="py-20 px-4 bg-wedding-cream relative overflow-hidden">
-        <!-- Decoración Palmera (SVG Opaco) -->
-        <div class="absolute top-0 right-0 opacity-5 w-64 h-64 pointer-events-none transform rotate-180">
-            <svg viewBox="0 0 24 24" fill="currentColor" class="w-full h-full text-wedding-navy"><path d="M17,11V5.3C17,4.4 16.6,3.4 15.9,2.8C15.2,2.2 14.2,1.9 13.3,1.9C12.4,1.9 11.4,2.2 10.7,2.8C10,3.4 9.7,4.4 9.7,5.3V11H17M20.9,13.4C20.6,12.7 20.1,12 19.5,11.5C18.9,10.9 18.2,10.6 17.5,10.5C16.8,10.4 16.1,10.6 15.5,11C14.9,11.4 14.4,12 14.1,12.6C13.8,13.2 13.8,14 14,14.7C14.2,15.4 14.7,16 15.3,16.4C15.9,16.8 16.6,17 17.3,16.9C18,16.8 18.7,16.4 19.2,15.9L20.9,13.4M5.6,12.6C5.3,12 4.8,11.4 4.2,11C3.6,10.6 2.9,10.4 2.2,10.5C1.5,10.6 0.8,10.9 0.2,11.5C-0.4,12 -0.8,12.7 -1.2,13.4L0.5,15.9C1,16.4 1.7,16.8 2.4,16.9C3.1,17 3.8,16.8 4.4,16.4C5,16 5.5,15.4 5.7,14.7C5.9,14 5.9,13.2 5.6,12.6M9.7,14.7V22H10.5C11.5,22 12.3,21.5 12.8,20.7C13.3,21.5 14.1,22 15.1,22H15.9V14.7H9.7Z"></path></svg>
-        </div>
+    <section class="py-12 md:py-20 px-4 bg-wedding-cream relative overflow-hidden">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="section-title font-serif text-center text-wedding-navy mb-8 md:mb-12">Detalles del Encuentro</h2>
 
-        <div class="max-w-5xl mx-auto">
-            <h2 class="font-serif text-4xl text-center text-wedding-navy mb-12">Detalles del Encuentro</h2>
-
-            <div class="grid md:grid-cols-3 gap-8 text-center fade-in-section">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center fade-in-section">
                 <!-- Fecha -->
-                <div class="p-6 bg-white rounded-lg shadow-lg border-b-4 border-wedding-gold hover:transform hover:-translate-y-1 transition duration-300">
+                <div class="p-6 bg-white rounded-lg shadow-lg border-b-4 border-wedding-gold">
                     <div class="inline-block p-3 bg-wedding-cream rounded-full mb-4">
-                    <i data-lucide="calendar" class="w-8 h-8 text-wedding-navy"></i>
+                    <i data-lucide="calendar" class="w-6 h-6 md:w-8 md:h-8 text-wedding-navy"></i>
                     </div>
-                    <h3 class="font-serif text-xl font-bold mb-2">Sábado</h3>
-                    <p class="text-3xl text-wedding-gold font-serif font-bold mb-2">28 FEB</p>
-                    <p class="text-gray-500 text-sm">Próximo Febrero</p>
+                    <h3 class="font-serif text-lg md:text-xl font-bold mb-2">Sábado</h3>
+                    <p class="text-2xl md:text-3xl text-wedding-gold font-serif font-bold mb-2">28 FEB</p>
+                    <p class="text-gray-500 text-xs md:text-sm">Próximo Febrero</p>
                 </div>
 
                 <!-- Hora -->
-                <div class="p-6 bg-white rounded-lg shadow-lg border-b-4 border-wedding-navy hover:transform hover:-translate-y-1 transition duration-300">
+                <div class="p-6 bg-white rounded-lg shadow-lg border-b-4 border-wedding-navy">
                     <div class="inline-block p-3 bg-wedding-cream rounded-full mb-4">
-                    <i data-lucide="clock" class="w-8 h-8 text-wedding-navy"></i>
+                    <i data-lucide="clock" class="w-6 h-6 md:w-8 md:h-8 text-wedding-navy"></i>
                     </div>
-                    <h3 class="font-serif text-xl font-bold mb-2">Recepción</h3>
-                    <p class="text-3xl text-wedding-gold font-serif font-bold mb-2">3:00 PM</p>
-                    <p class="text-gray-500 text-sm">Se ruega puntualidad extrema</p>
+                    <h3 class="font-serif text-lg md:text-xl font-bold mb-2">Recepción</h3>
+                    <p class="text-2xl md:text-3xl text-wedding-gold font-serif font-bold mb-2">3:00 PM</p>
+                    <p class="text-gray-500 text-xs md:text-sm">Se ruega puntualidad extrema</p>
                 </div>
 
                 <!-- Lugar -->
-                <div class="p-6 bg-white rounded-lg shadow-lg border-b-4 border-wedding-gold hover:transform hover:-translate-y-1 transition duration-300">
+                <div class="p-6 bg-white rounded-lg shadow-lg border-b-4 border-wedding-gold">
                     <div class="inline-block p-3 bg-wedding-cream rounded-full mb-4">
-                    <i data-lucide="map-pin" class="w-8 h-8 text-wedding-navy"></i>
+                    <i data-lucide="map-pin" class="w-6 h-6 md:w-8 md:h-8 text-wedding-navy"></i>
                     </div>
-                    <h3 class="font-serif text-xl font-bold mb-2">Ixtapa Zihuatanejo</h3>
-                    <p class="text-gray-600 mb-4 text-sm leading-relaxed">
+                    <h3 class="font-serif text-lg md:text-xl font-bold mb-2">Ixtapa Zihuatanejo</h3>
+                    <p class="text-gray-600 mb-4 text-xs md:text-sm leading-relaxed">
                     Colina de las Palomas #300<br>
                     C.P. 40884
                     </p>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Colina+de+las+Palomas+300+Ixtapa+Zihuatanejo" target="_blank" class="inline-flex items-center text-wedding-navy font-bold hover:text-wedding-gold transition">
+                    <a href="https://www.google.com/maps/search/?api=1&query=Colina+de+las+Palomas+300+Ixtapa+Zihuatanejo" target="_blank" class="inline-flex items-center text-wedding-navy text-sm font-bold hover:text-wedding-gold transition">
                     <span>Ver Mapa</span>
                     <i data-lucide="external-link" class="w-4 h-4 ml-2"></i>
                     </a>
@@ -267,13 +263,13 @@
         </div>
     </section>
 
-    <!-- SECCIÓN 7: RSVP & CONTADOR (Secciones anteriores eliminadas) -->
-    <section class="py-20 px-4 bg-gradient-to-b from-wedding-cream to-white text-center" id="rsvp">
-        <div class="max-w-4xl mx-auto fade-in-section">
-            <h2 class="font-serif text-3xl text-wedding-navy mb-8">Cuenta regresiva para la sorpresa</h2>
+    <!-- SECCIÓN 5: RSVP & CONTADOR -->
+    <section class="py-12 md:py-20 px-4 bg-gradient-to-b from-wedding-cream to-white text-center" id="rsvp">
+        <div class="max-w-3xl mx-auto fade-in-section">
+            <h2 class="section-title font-serif text-wedding-navy mb-6 md:mb-8">Cuenta regresiva para la sorpresa</h2>
 
             <!-- Contador -->
-            <div class="flex justify-center gap-4 md:gap-8 mb-12">
+            <div class="flex justify-center gap-3 md:gap-8 mb-8 md:mb-12">
                 <div class="flex flex-col">
                     <span id="days" class="text-3xl md:text-5xl font-serif font-bold text-wedding-gold">00</span>
                     <span class="text-xs uppercase tracking-widest text-wedding-navy mt-2">Días</span>
@@ -291,16 +287,16 @@
             </div>
 
             <!-- Botón RSVP -->
-            <a href="https://wa.me/?text=%C2%A1Hola!%20Confirmo%20mi%20asistencia%20a%20la%20Boda%20Secreta%20y%20prometo%20discreci%C3%B3n%20%F0%9F%A4%AB%20" target="_blank" class="inline-flex items-center bg-wedding-navy hover:bg-opacity-90 text-white px-8 py-4 rounded-full font-bold shadow-lg transform hover:scale-105 transition duration-300">
+            <a href="https://wa.me/?text=%C2%A1Hola!%20Confirmo%20mi%20asistencia%20a%20la%20Boda%20Secreta%20y%20prometo%20discreci%C3%B3n%20%F0%9F%A4%AB%20" target="_blank" class="inline-flex items-center bg-wedding-navy hover:bg-opacity-90 text-white px-6 md:px-8 py-3 md:py-4 rounded-full text-sm md:text-base font-bold shadow-lg transform hover:scale-105 transition duration-300">
                 <i data-lucide="check-circle" class="mr-2 w-5 h-5"></i>
                 CONFIRMAR ASISTENCIA
             </a>
 
-            <p class="mt-6 text-sm text-gray-500 italic">Serás redirigido a WhatsApp para confirmar</p>
+            <p class="mt-4 md:mt-6 text-xs md:text-sm text-gray-500 italic px-4">Serás redirigido a WhatsApp para confirmar</p>
         </div>
     </section>
 
-    <footer class="bg-wedding-navy text-wedding-gray py-10 text-center text-sm">
+    <footer class="bg-wedding-navy text-wedding-gray py-8 md:py-10 text-center text-xs md:text-sm">
         <p class="mb-2">Hecho con ❤️ y mucho secreto</p>
         <p class="opacity-50">Ixtapa Zihuatanejo</p>
     </footer>
@@ -312,11 +308,9 @@
 
         // Lógica del Contador
         function updateCountdown() {
-            // FECHA OBJETIVO: 28 de Febrero del próximo año (o actual si no ha pasado)
             const now = new Date();
             let year = now.getFullYear();
 
-            // Si ya pasó el 28 de feb este año, apuntar al siguiente
             const eventDateThisYear = new Date(`February 28, ${year} 15:00:00`);
             if (now > eventDateThisYear) {
                 year++;
@@ -328,17 +322,14 @@
                 const currentTime = new Date().getTime();
                 const distance = eventDate - currentTime;
 
-                // Cálculos de tiempo
                 const days = Math.floor(distance / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 
-                // Mostrar resultados
                 document.getElementById("days").innerText = days < 10 ? "0" + days : days;
                 document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
                 document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
 
-                // Si la cuenta termina
                 if (distance < 0) {
                     clearInterval(timer);
                     document.getElementById("days").innerText = "00";
@@ -350,7 +341,7 @@
 
         updateCountdown();
 
-        // Animación al hacer Scroll (Intersection Observer)
+        // Animación al hacer Scroll
         const observerOptions = {
             root: null,
             rootMargin: '0px',
@@ -361,7 +352,7 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
-                    observer.unobserve(entry.target); // Dejar de observar una vez animado
+                    observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
@@ -370,22 +361,36 @@
             observer.observe(section);
         });
 
-        // Lógica para reproducir video al hacer hover
+        // Lógica para reproducir video al hacer tap/hover
         const mediaContainer = document.querySelector('.media-container');
-        const videoIframe = mediaContainer.querySelector('iframe');
-        
+        const video = mediaContainer.querySelector('video');
+
+        // Desktop: hover
         mediaContainer.addEventListener('mouseenter', function() {
-            // Agregar autoplay al src cuando se hace hover
-            const currentSrc = videoIframe.src;
-            if (!currentSrc.includes('autoplay=1')) {
-                videoIframe.src = currentSrc + '?autoplay=1';
-            }
+            video.play();
         });
-        
+
         mediaContainer.addEventListener('mouseleave', function() {
-            // Detener video al quitar cursor (recargar iframe sin autoplay)
-            const currentSrc = videoIframe.src.replace('?autoplay=1', '');
-            videoIframe.src = currentSrc;
+            video.pause();
+            video.currentTime = 0;
+        });
+
+        // Mobile: tap/touch
+        let isVideoPlaying = false;
+
+        mediaContainer.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            if (!isVideoPlaying) {
+                mediaContainer.classList.add('active');
+                video.play();
+                isVideoPlaying = true;
+            } else {
+                mediaContainer.classList.remove('active');
+                video.pause();
+                video.currentTime = 0;
+                isVideoPlaying = false;
+            }
         });
     </script>
 </body>
