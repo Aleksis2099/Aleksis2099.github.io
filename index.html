@@ -103,12 +103,9 @@
         /* Hover effect: Imagen por defecto, video al pasar cursor */
         .media-container {
             position: relative;
-            width: 100%;
-            max-width: 640px;
-            height: auto;
-            aspect-ratio: 4/3;
+            width: 640px;
+            height: 480px;
             cursor: pointer;
-            margin: 0 auto;
         }
 
         .media-container img {
@@ -120,7 +117,6 @@
             object-fit: cover;
             transition: opacity 0.3s ease;
             z-index: 2;
-            border-radius: 8px;
         }
 
         .media-container video {
@@ -131,21 +127,10 @@
             height: 100%;
             object-fit: cover;
             z-index: 1;
-            border-radius: 8px;
         }
 
-        /* Desktop: hover para mostrar video */
-        @media (hover: hover) {
-            .media-container:hover img {
-                opacity: 0;
-            }
-        }
-
-        /* Mobile: tap para mostrar video */
-        @media (hover: none) {
-            .media-container.active img {
-                opacity: 0;
-            }
+        .media-container:hover img {
+            opacity: 0;
         }
     </style>
 </head>
@@ -186,17 +171,16 @@
                 <div class="media-container">
                     <!-- Imagen (visible por defecto) -->
                     <img 
-                      src="Boda R & D Gemini.png" 
+                      src="assets/Boda R & D Gemini.png" 
                       alt="Foto de los novios"
                     >
                     
                     <!-- Video HTML5 (se muestra al pasar cursor) -->
                     <video 
-                      src="Vídeo.mp4"
+                      src="assets/Video.mp4"
                       style="border:0;"
                       muted
                       playsinline
-                      loop
                     ></video>
                 </div>
 
@@ -386,36 +370,22 @@
             observer.observe(section);
         });
 
-        // Lógica para reproducir video al hacer hover/tap
+        // Lógica para reproducir video al hacer hover
         const mediaContainer = document.querySelector('.media-container');
-        const video = mediaContainer.querySelector('video');
+        const videoIframe = mediaContainer.querySelector('iframe');
         
-        // Desktop: hover
         mediaContainer.addEventListener('mouseenter', function() {
-            video.play();
+            // Agregar autoplay al src cuando se hace hover
+            const currentSrc = videoIframe.src;
+            if (!currentSrc.includes('autoplay=1')) {
+                videoIframe.src = currentSrc + '?autoplay=1';
+            }
         });
         
         mediaContainer.addEventListener('mouseleave', function() {
-            video.pause();
-            video.currentTime = 0; // Reiniciar al inicio
-        });
-
-        // Mobile: tap/touch
-        let isVideoPlaying = false;
-        
-        mediaContainer.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            if (!isVideoPlaying) {
-                mediaContainer.classList.add('active');
-                video.play();
-                isVideoPlaying = true;
-            } else {
-                mediaContainer.classList.remove('active');
-                video.pause();
-                video.currentTime = 0;
-                isVideoPlaying = false;
-            }
+            // Detener video al quitar cursor (recargar iframe sin autoplay)
+            const currentSrc = videoIframe.src.replace('?autoplay=1', '');
+            videoIframe.src = currentSrc;
         });
     </script>
 </body>
