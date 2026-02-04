@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Celebración Especial - Confidencial</title>
-    
+
     <!-- Fuentes Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    
+
     <!-- Iconos Lucide -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
@@ -42,14 +42,14 @@
         body {
             scroll-behavior: smooth;
         }
-        
+
         .fade-in-section {
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 1s ease-out, transform 1s ease-out;
             will-change: opacity, visibility;
         }
-        
+
         .fade-in-section.is-visible {
             opacity: 1;
             transform: none;
@@ -99,6 +99,39 @@
         .waves-divider .shape-fill {
             fill: #F5F5DC;
         }
+
+        /* Hover effect: Imagen por defecto, video al pasar cursor */
+        .media-container {
+            position: relative;
+            width: 640px;
+            height: 480px;
+            cursor: pointer;
+        }
+
+        .media-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.3s ease;
+            z-index: 2;
+        }
+
+        .media-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        .media-container:hover img {
+            opacity: 0;
+        }
     </style>
 </head>
 <body class="bg-wedding-cream text-wedding-navy font-sans antialiased overflow-x-hidden">
@@ -107,7 +140,7 @@
     <header class="relative h-screen flex flex-col items-center justify-center bg-wedding-navy text-center px-4 overflow-hidden">
         <!-- Fondo decorativo sutil -->
         <div class="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center"></div>
-        
+
         <div class="z-10 fade-in-section is-visible delay-300">
             <i data-lucide="mail" class="w-16 h-16 text-wedding-gold mx-auto mb-6 opacity-80"></i>
             <h1 class="font-serif text-5xl md:text-7xl text-wedding-cream tracking-wide mb-4">Celebración <br> <span class="text-wedding-gold italic">Especial</span></h1>
@@ -118,7 +151,7 @@
         <div class="absolute bottom-10 animate-bounce">
             <i data-lucide="chevron-down" class="text-wedding-gold w-8 h-8"></i>
         </div>
-        
+
         <!-- Olas decorativas abajo -->
         <div class="waves-divider">
             <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
@@ -133,11 +166,24 @@
             <div class="relative inline-block mb-10 group">
                 <!-- Marco decorativo (Ajustado a rectángulo) -->
                 <div class="absolute -inset-4 border-2 border-wedding-gold opacity-50 rounded-xl transform translate-x-2 translate-y-2"></div>
-                
-                <!-- VIDEO EN BUCLE (HTML5) -->
-                <!-- Se usa el enlace de exportación directa para permitir autoplay y loop -->
-                <iframe src="https://drive.google.com/file/d/1sYlreM9lAzD0lt1xCmhl7dJCUVPa89AU/preview?autoplay=1" width="640" height="480" allow="autoplay"></iframe>
-                
+
+                <!-- CONTENEDOR: Imagen por defecto, video al hover -->
+                <div class="media-container">
+                    <!-- Imagen (visible por defecto) -->
+                    <img 
+                      src="assets/Boda R & D Gemini.png" 
+                      alt="Foto de los novios"
+                    >
+                    
+                    <!-- Video HTML5 (se muestra al pasar cursor) -->
+                    <video 
+                      src="assets/Video.mp4"
+                      style="border:0;"
+                      muted
+                      playsinline
+                    ></video>
+                </div>
+
                 <div class="absolute -bottom-6 -right-6 bg-wedding-navy text-wedding-gold p-4 rounded-full shadow-lg z-20">
                     <i data-lucide="heart" class="w-8 h-8 fill-current"></i>
                 </div>
@@ -180,7 +226,7 @@
 
         <div class="max-w-5xl mx-auto">
             <h2 class="font-serif text-4xl text-center text-wedding-navy mb-12">Detalles del Encuentro</h2>
-            
+
             <div class="grid md:grid-cols-3 gap-8 text-center fade-in-section">
                 <!-- Fecha -->
                 <div class="p-6 bg-white rounded-lg shadow-lg border-b-4 border-wedding-gold hover:transform hover:-translate-y-1 transition duration-300">
@@ -225,7 +271,7 @@
     <section class="py-20 px-4 bg-gradient-to-b from-wedding-cream to-white text-center" id="rsvp">
         <div class="max-w-4xl mx-auto fade-in-section">
             <h2 class="font-serif text-3xl text-wedding-navy mb-8">Cuenta regresiva para la sorpresa</h2>
-            
+
             <!-- Contador -->
             <div class="flex justify-center gap-4 md:gap-8 mb-12">
                 <div class="flex flex-col">
@@ -249,7 +295,7 @@
                 <i data-lucide="check-circle" class="mr-2 w-5 h-5"></i>
                 CONFIRMAR ASISTENCIA
             </a>
-            
+
             <p class="mt-6 text-sm text-gray-500 italic">Serás redirigido a WhatsApp para confirmar</p>
         </div>
     </section>
@@ -269,15 +315,15 @@
             // FECHA OBJETIVO: 28 de Febrero del próximo año (o actual si no ha pasado)
             const now = new Date();
             let year = now.getFullYear();
-            
+
             // Si ya pasó el 28 de feb este año, apuntar al siguiente
             const eventDateThisYear = new Date(`February 28, ${year} 15:00:00`);
             if (now > eventDateThisYear) {
                 year++;
             }
-            
+
             const eventDate = new Date(`February 28, ${year} 15:00:00`).getTime();
-            
+
             const timer = setInterval(function() {
                 const currentTime = new Date().getTime();
                 const distance = eventDate - currentTime;
@@ -322,6 +368,24 @@
 
         document.querySelectorAll('.fade-in-section').forEach(section => {
             observer.observe(section);
+        });
+
+        // Lógica para reproducir video al hacer hover
+        const mediaContainer = document.querySelector('.media-container');
+        const videoIframe = mediaContainer.querySelector('iframe');
+        
+        mediaContainer.addEventListener('mouseenter', function() {
+            // Agregar autoplay al src cuando se hace hover
+            const currentSrc = videoIframe.src;
+            if (!currentSrc.includes('autoplay=1')) {
+                videoIframe.src = currentSrc + '?autoplay=1';
+            }
+        });
+        
+        mediaContainer.addEventListener('mouseleave', function() {
+            // Detener video al quitar cursor (recargar iframe sin autoplay)
+            const currentSrc = videoIframe.src.replace('?autoplay=1', '');
+            videoIframe.src = currentSrc;
         });
     </script>
 </body>
