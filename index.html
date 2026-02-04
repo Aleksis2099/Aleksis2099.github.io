@@ -199,48 +199,6 @@
         </div>
     </header>
 
-    <!-- SECCIÓN NUEVA: PASE PERSONALIZADO -->
-    <section class="py-12 md:py-16 px-4 bg-gradient-to-b from-wedding-cream to-white">
-        <div class="max-w-xl mx-auto">
-            <div class="bg-white rounded-2xl shadow-2xl border-4 border-wedding-gold p-6 md:p-10 text-center fade-in-section">
-                <!-- Icono de ticket -->
-                <div class="inline-block p-3 md:p-4 bg-wedding-navy rounded-full mb-4 md:mb-6">
-                    <i data-lucide="ticket" class="w-8 h-8 md:w-12 md:h-12 text-wedding-gold"></i>
-                </div>
-                
-                <!-- Título del pase -->
-                <h2 class="font-serif text-2xl md:text-3xl text-wedding-navy mb-3 md:mb-4">Pase Exclusivo</h2>
-                <div class="w-20 h-1 bg-wedding-gold mx-auto mb-6 md:mb-8"></div>
-                
-                <!-- Nombre del invitado -->
-                <div class="mb-4 md:mb-6">
-                    <p class="text-xs md:text-sm uppercase tracking-widest text-gray-500 mb-2">Invitado(a)</p>
-                    <p id="pase-nombre" class="font-serif text-xl md:text-2xl text-wedding-navy font-bold">Cargando...</p>
-                </div>
-                
-                <!-- Número de personas -->
-                <div class="bg-wedding-cream rounded-xl p-4 md:p-6 mb-4 md:mb-6">
-                    <p class="text-xs md:text-sm uppercase tracking-widest text-gray-600 mb-2">Pase válido para</p>
-                    <div class="flex items-center justify-center gap-2 md:gap-3">
-                        <i data-lucide="users" class="w-6 h-6 md:w-8 md:h-8 text-wedding-gold"></i>
-                        <p id="pase-personas" class="text-4xl md:text-5xl font-serif font-bold text-wedding-gold">0</p>
-                        <span class="text-lg md:text-xl text-gray-600">persona(s)</span>
-                    </div>
-                </div>
-                
-                <!-- Mensaje decorativo -->
-                <div class="border-t-2 border-dashed border-wedding-gold pt-4 md:pt-6">
-                    <p class="text-xs md:text-sm text-gray-600 italic">Este pase es intransferible y confidencial</p>
-                    <div class="flex justify-center gap-2 mt-3 md:mt-4">
-                        <div class="w-2 h-2 bg-wedding-gold rounded-full"></div>
-                        <div class="w-2 h-2 bg-wedding-gold rounded-full"></div>
-                        <div class="w-2 h-2 bg-wedding-gold rounded-full"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- SECCIÓN 2: LA REVELACIÓN (Foto) -->
     <section class="py-12 md:py-20 px-4 bg-wedding-cream relative" id="reveal">
         <div class="max-w-2xl mx-auto text-center fade-in-section">
@@ -276,6 +234,16 @@
 
             <!-- Nombres de los novios -->
             <h2 class="font-serif text-3xl md:text-4xl text-wedding-gold mb-3">Rubén & Damarys</h2>
+            
+            <!-- Pase personalizado -->
+            <div class="bg-white rounded-lg shadow-md p-4 mb-6 border-l-4 border-wedding-gold inline-block">
+                <p class="text-sm text-gray-600 mb-1">Pase especial para:</p>
+                <p class="font-serif text-xl md:text-2xl font-bold text-wedding-navy" id="guestName">Invitado</p>
+                <p class="text-sm text-wedding-gold font-semibold mt-2">
+                    <i data-lucide="users" class="inline w-4 h-4"></i>
+                    <span id="guestCount">1</span> persona(s)
+                </p>
+            </div>
             
             <h2 class="section-title font-serif text-wedding-navy mb-4 px-2">Shhh... ¡Es una Sorpresa!</h2>
             <p class="text-base md:text-lg text-gray-700 leading-relaxed px-4">
@@ -374,7 +342,7 @@
             </div>
 
             <!-- Botón RSVP -->
-            <a href="https://chat.whatsapp.com/CArVn7pQtGN34WaWEz2dGd?mode=gi_t?text=%C2%A1Hola!%20Confirmo%20mi%20asistencia%20a%20la%20Boda%20Secreta%20y%20prometo%20discreci%C3%B3n%20%F0%9F%A4%AB%20" target="_blank" class="inline-flex items-center bg-wedding-navy hover:bg-opacity-90 text-white px-6 md:px-8 py-3 md:py-4 rounded-full text-sm md:text-base font-bold shadow-lg transform hover:scale-105 transition duration-300">
+            <a href="#" id="rsvpButton" class="inline-flex items-center bg-wedding-navy hover:bg-opacity-90 text-white px-6 md:px-8 py-3 md:py-4 rounded-full text-sm md:text-base font-bold shadow-lg transform hover:scale-105 transition duration-300">
                 <i data-lucide="check-circle" class="mr-2 w-5 h-5"></i>
                 CONFIRMAR ASISTENCIA
             </a>
@@ -393,28 +361,27 @@
         // Inicializar iconos
         lucide.createIcons();
 
-        // ========== LEER PARÁMETROS DE LA URL (PASE INTELIGENTE) ==========
+        // Obtener parámetros de la URL
         function getURLParams() {
             const params = new URLSearchParams(window.location.search);
             return {
-                nombre: params.get('nombre') || 'Invitado Especial',
+                nombre: params.get('nombre') || 'Invitado',
                 personas: params.get('personas') || '1'
             };
         }
 
-        // Obtener datos del pase
-        const paseData = getURLParams();
-        
-        // Actualizar el DOM con los datos del pase cuando cargue la página
+        // Generar enlace de WhatsApp personalizado
+        function generateWhatsAppLink() {
+            const { nombre, personas } = getURLParams();
+            const mensaje = `¡Hola! Soy ${nombre} y confirmo mi asistencia a la Boda Secreta para ${personas} persona(s). ¡Prometo discreción! 🤫`;
+            const mensajeCodificado = encodeURIComponent(mensaje);
+            return `https://wa.me/527551158570?text=${mensajeCodificado}`;
+        }
+
+        // Configurar el botón de RSVP
         document.addEventListener('DOMContentLoaded', function() {
-            // Actualizar nombre y número de personas
-            document.getElementById('pase-nombre').textContent = paseData.nombre;
-            document.getElementById('pase-personas').textContent = paseData.personas;
-            
-            // Actualizar el enlace de WhatsApp con el nombre y personas
-            const whatsappLink = document.querySelector('a[href*="whatsapp"]');
-            const mensaje = `¡Hola! Soy ${paseData.nombre} y confirmo mi asistencia a la Boda Secreta para ${paseData.personas} persona(s). ¡Prometo discreción! 🤫`;
-            whatsappLink.href = `https://chat.whatsapp.com/CArVn7pQtGN34WaWEz2dGd`;
+            const rsvpButton = document.getElementById('rsvpButton');
+            rsvpButton.href = generateWhatsAppLink();
         });
 
         // Lógica del Contador
