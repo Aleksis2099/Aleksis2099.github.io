@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celebración Especial - Confidencial</title>
+    
+    <!-- Fuentes Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Iconos Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind CSS (Framework de diseño) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                    'wedding-cream': '#F5F5DC', // Crema Arena
+                    'wedding-navy': '#1A2B49',  // Azul Marino Profundo
+                    'wedding-gold': '#C5A059',  // Dorado Mate
+                    'wedding-gray': '#E5E4E2',  // Gris Perla
+                    },
+                    fontFamily: {
+                    'serif': ['"Playfair Display"', 'serif'],
+                    'sans': ['"Montserrat"', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                    'palm-pattern': "url('https://www.transparenttextures.com/patterns/cubes.png')", // Textura sutil
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Estilos personalizados y animaciones */
+        body {
+            scroll-behavior: smooth;
+        }
+        
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+            will-change: opacity, visibility;
+        }
+        
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        .gold-shimmer {
+            background: linear-gradient(to right, #C5A059 20%, #EDC967 40%, #EDC967 60%, #C5A059 80%);
+            background-size: 200% auto;
+            color: transparent;
+            background-clip: text;
+            -webkit-background-clip: text;
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes shimmer {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        /* Forma de arco para la foto */
+        .arch-image {
+            border-top-left-radius: 50% 100px;
+            border-top-right-radius: 50% 100px;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+
+        /* Olas sutiles */
+        .waves-divider {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            transform: rotate(180deg);
+        }
+
+        .waves-divider svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 60px;
+        }
+
+        .waves-divider .shape-fill {
+            fill: #F5F5DC;
+        }
+    </style>
+</head>
+<body class="bg-wedding-cream text-wedding-navy font-sans antialiased overflow-x-hidden">
+
+    <!-- SECCIÓN 1: HERO (Portada Misteriosa) -->
+    <header class="relative h-screen flex flex-col items-center justify-center bg-wedding-navy text-center px-4 overflow-hidden">
+        <!-- Fondo decorativo sutil -->
+        <div class="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center"></div>
+        
+        <div class="z-10 fade-in-section is-visible delay-300">
+            <i data-lucide="mail" class="w-16 h-16 text-wedding-gold mx-auto mb-6 opacity-80"></i>
+            <h1 class="font-serif text-5xl md:text-7xl text-wedding-cream tracking-wide mb-4">Celebración <br> <span class="text-wedding-gold italic">Especial</span></h1>
+            <div class="w-24 h-1 bg-wedding-gold mx-auto my-6"></div>
+            <p class="text-wedding-gray text-lg md:text-xl font-light tracking-widest uppercase">Una ocasión única que requiere tu discreción</p>
+        </div>
+
+        <div class="absolute bottom-10 animate-bounce">
+            <i data-lucide="chevron-down" class="text-wedding-gold w-8 h-8"></i>
+        </div>
+        
+        <!-- Olas decorativas abajo -->
+        <div class="waves-divider">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
+    </header>
+
+    <!-- SECCIÓN 2: LA REVELACIÓN (Foto) -->
+    <section class="py-20 px-4 bg-wedding-cream relative" id="reveal">
+        <div class="max-w-4xl mx-auto text-center fade-in-section">
+            <div class="relative inline-block mb-10 group">
+                <!-- Marco decorativo (Ajustado a rectángulo) -->
+                <div class="absolute -inset-4 border-2 border-wedding-gold opacity-50 rounded-xl transform translate-x-2 translate-y-2"></div>
+                
+                <!-- VIDEO EN BUCLE (HTML5) -->
+                <!-- Se usa el enlace de exportación directa para permitir autoplay y loop -->
+                <iframe src="https://drive.google.com/file/d/1sYlreM9lAzD0lt1xCmhl7dJCUVPa89AU/preview?autoplay=1" width="640" height="480" allow="autoplay"></iframe>
+                
+                <div class="absolute -bottom-6 -right-6 bg-wedding-navy text-wedding-gold p-4 rounded-full shadow-lg z-20">
+                    <i data-lucide="heart" class="w-8 h-8 fill-current"></i>
+                </div>
+            </div>
+
+            <h2 class="font-serif text-4xl md:text-5xl text-wedding-navy mb-6">Shhh... ¡Es una Sorpresa!</h2>
+            <p class="text-lg text-gray-700 leading-relaxed max-w-2xl mx-auto">
+                Acompáñanos a celebrar el amor en una boda sorpresa inolvidable. 
+                Ellos creen que es una simple reunión, pero juntos haremos historia. 
+                <span class="font-serif italic text-wedding-gold font-bold">¡Tu complicidad es esencial!</span>
+            </p>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 3: ALERTA DE CONFIDENCIALIDAD -->
+    <section class="py-12 px-4 bg-wedding-gray/30 border-y border-wedding-gold/20">
+        <div class="max-w-3xl mx-auto">
+            <div class="bg-wedding-gray rounded-xl p-8 border-2 border-dashed border-wedding-gold shadow-inner text-center fade-in-section">
+                <div class="flex justify-center mb-4">
+                    <div class="bg-wedding-navy p-3 rounded-full">
+                    <i data-lucide="lock" class="text-wedding-gold w-8 h-8"></i>
+                    </div>
+                </div>
+                <h3 class="font-serif text-2xl font-bold text-wedding-navy mb-4 uppercase tracking-widest">⚠️ Importante: Confidencialidad Total</h3>
+                <p class="text-gray-700 font-medium">
+                    Este evento es una sorpresa absoluta para los novios.
+                    Por favor, <span class="text-red-800 font-bold">NO publiques nada en redes sociales</span> donde ellos puedan verlo ni les comentes nada antes de la fecha.
+                </p>
+                <p class="mt-4 text-wedding-navy font-bold italic">¡Ayúdanos a guardar el secreto hasta el gran momento!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 4: DETALLES -->
+    <section class="py-20 px-4 bg-wedding-cream relative overflow-hidden">
+        <!-- Decoración Palmera (SVG Opaco) -->
+        <div class="absolute top-0 right-0 opacity-5 w-64 h-64 pointer-events-none transform rotate-180">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="w-full h-full text-wedding-navy"><path d="M17,11V5.3C17,4.4 16.6,3.4 15.9,2.8C15.2,2.2 14.2,1.9 13.3,1.9C12.4,1.9 11.4,2.2 10.7,2.8C10,3.4 9.7,4.4 9.7,5.3V11H17M20.9,13.4C20.6,12.7 20.1,12 19.5,11.5C18.9,10.9 18.2,10.6 17.5,10.5C16.8,10.4 16.1,10.6 15.5,11C14.9,11.4 14.4,12 14.1,12.6C13.8,13.2 13.8,14 14,14.7C14.2,15.4 14.7,16 15.3,16.4C15.9,16.8 16.6,17 17.3,16.9C18,16.8 18.7,16.4 19.2,15.9L20.9,13.4M5.6,12.6C5.3,12 4.8,11.4 4.2,11C3.6,10.6 2.9,10.4 2.2,10.5C1.5,10.6 0.8,10.9 0.2,11.5C-0.4,12 -0.8,12.7 -1.2,13.4L0.5,15.9C1,16.4 1.7,16.8 2.4,16.9C3.1,17 3.8,16.8 4.4,16.4C5,16 5.5,15.4 5.7,14.7C5.9,14 5.9,13.2 5.6,12.6M9.7,14.7V22H10.5C11.5,22 12.3,21.5 12.8,20.7C13.3,21.5 14.1,22 15.1,22H15.9V14.7H9.7Z"></path></svg>
+        </div>
+
+        <div class="max-w-5xl mx-auto">
+            <h2 class="font-serif text-4xl text-center text-wedding-navy mb-12">Detalles del Encuentro</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8 text-center fade-in-section">
+                <!-- Fecha -->
+                <div class="p-6 bg-white rounded-lg shadow-lg border-b-4 border-wedding-gold hover:transform hover:-translate-y-1 transition duration-300">
+                    <div class="inline-block p-3 bg-wedding-cream rounded-full mb-4">
+                    <i data-lucide="calendar" class="w-8 h-8 text-wedding-navy"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold mb-2">Sábado</h3>
+                    <p class="text-3xl text-wedding-gold font-serif font-bold mb-2">28 FEB</p>
+                    <p class="text-gray-500 text-sm">Próximo Febrero</p>
+                </div>
+
+                <!-- Hora -->
+                <div class="p-6 bg-white rounded-lg shadow-lg border-b-4 border-wedding-navy hover:transform hover:-translate-y-1 transition duration-300">
+                    <div class="inline-block p-3 bg-wedding-cream rounded-full mb-4">
+                    <i data-lucide="clock" class="w-8 h-8 text-wedding-navy"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold mb-2">Recepción</h3>
+                    <p class="text-3xl text-wedding-gold font-serif font-bold mb-2">3:00 PM</p>
+                    <p class="text-gray-500 text-sm">Se ruega puntualidad extrema</p>
+                </div>
+
+                <!-- Lugar -->
+                <div class="p-6 bg-white rounded-lg shadow-lg border-b-4 border-wedding-gold hover:transform hover:-translate-y-1 transition duration-300">
+                    <div class="inline-block p-3 bg-wedding-cream rounded-full mb-4">
+                    <i data-lucide="map-pin" class="w-8 h-8 text-wedding-navy"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold mb-2">Ixtapa Zihuatanejo</h3>
+                    <p class="text-gray-600 mb-4 text-sm leading-relaxed">
+                    Colina de las Palomas #300<br>
+                    C.P. 40884
+                    </p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Colina+de+las+Palomas+300+Ixtapa+Zihuatanejo" target="_blank" class="inline-flex items-center text-wedding-navy font-bold hover:text-wedding-gold transition">
+                    <span>Ver Mapa</span>
+                    <i data-lucide="external-link" class="w-4 h-4 ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 7: RSVP & CONTADOR (Secciones anteriores eliminadas) -->
+    <section class="py-20 px-4 bg-gradient-to-b from-wedding-cream to-white text-center" id="rsvp">
+        <div class="max-w-4xl mx-auto fade-in-section">
+            <h2 class="font-serif text-3xl text-wedding-navy mb-8">Cuenta regresiva para la sorpresa</h2>
+            
+            <!-- Contador -->
+            <div class="flex justify-center gap-4 md:gap-8 mb-12">
+                <div class="flex flex-col">
+                    <span id="days" class="text-3xl md:text-5xl font-serif font-bold text-wedding-gold">00</span>
+                    <span class="text-xs uppercase tracking-widest text-wedding-navy mt-2">Días</span>
+                </div>
+                <div class="text-3xl md:text-5xl text-wedding-navy/30">:</div>
+                <div class="flex flex-col">
+                    <span id="hours" class="text-3xl md:text-5xl font-serif font-bold text-wedding-gold">00</span>
+                    <span class="text-xs uppercase tracking-widest text-wedding-navy mt-2">Horas</span>
+                </div>
+                <div class="text-3xl md:text-5xl text-wedding-navy/30">:</div>
+                <div class="flex flex-col">
+                    <span id="minutes" class="text-3xl md:text-5xl font-serif font-bold text-wedding-gold">00</span>
+                    <span class="text-xs uppercase tracking-widest text-wedding-navy mt-2">Min</span>
+                </div>
+            </div>
+
+            <!-- Botón RSVP -->
+            <a href="https://wa.me/?text=%C2%A1Hola!%20Confirmo%20mi%20asistencia%20a%20la%20Boda%20Secreta%20y%20prometo%20discreci%C3%B3n%20%F0%9F%A4%AB%20" target="_blank" class="inline-flex items-center bg-wedding-navy hover:bg-opacity-90 text-white px-8 py-4 rounded-full font-bold shadow-lg transform hover:scale-105 transition duration-300">
+                <i data-lucide="check-circle" class="mr-2 w-5 h-5"></i>
+                CONFIRMAR ASISTENCIA
+            </a>
+            
+            <p class="mt-6 text-sm text-gray-500 italic">Serás redirigido a WhatsApp para confirmar</p>
+        </div>
+    </section>
+
+    <footer class="bg-wedding-navy text-wedding-gray py-10 text-center text-sm">
+        <p class="mb-2">Hecho con ❤️ y mucho secreto</p>
+        <p class="opacity-50">Ixtapa Zihuatanejo</p>
+    </footer>
+
+    <!-- Script de Lógica -->
+    <script>
+        // Inicializar iconos
+        lucide.createIcons();
+
+        // Lógica del Contador
+        function updateCountdown() {
+            // FECHA OBJETIVO: 28 de Febrero del próximo año (o actual si no ha pasado)
+            const now = new Date();
+            let year = now.getFullYear();
+            
+            // Si ya pasó el 28 de feb este año, apuntar al siguiente
+            const eventDateThisYear = new Date(`February 28, ${year} 15:00:00`);
+            if (now > eventDateThisYear) {
+                year++;
+            }
+            
+            const eventDate = new Date(`February 28, ${year} 15:00:00`).getTime();
+            
+            const timer = setInterval(function() {
+                const currentTime = new Date().getTime();
+                const distance = eventDate - currentTime;
+
+                // Cálculos de tiempo
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+                // Mostrar resultados
+                document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+                document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+                document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+
+                // Si la cuenta termina
+                if (distance < 0) {
+                    clearInterval(timer);
+                    document.getElementById("days").innerText = "00";
+                    document.getElementById("hours").innerText = "00";
+                    document.getElementById("minutes").innerText = "00";
+                }
+            }, 1000);
+        }
+
+        updateCountdown();
+
+        // Animación al hacer Scroll (Intersection Observer)
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target); // Dejar de observar una vez animado
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
