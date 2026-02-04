@@ -120,6 +120,42 @@
             }
         }
 
+        /* Banner de instrucción para reproducir video */
+        .play-banner {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(26, 43, 73, 0.85);
+            backdrop-filter: blur(8px);
+            color: #C5A059;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            animation: pulse 2s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .media-container.active .play-banner {
+            display: none;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: translateX(-50%) scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: translateX(-50%) scale(1.05);
+            }
+        }
+
         /* Ajustes de texto para móvil */
         @media (max-width: 640px) {
             .hero-title {
@@ -182,6 +218,12 @@
                       playsinline
                       loop
                     ></video>
+
+                    <!-- Banner de instrucción -->
+                    <div class="play-banner">
+                        <i data-lucide="play-circle" class="w-4 h-4"></i>
+                        <span>Toca para ver el video</span>
+                    </div>
                 </div>
 
                 <!-- Icono corazón -->
@@ -190,6 +232,9 @@
                 </div>
             </div>
 
+            <!-- Nombres de los novios -->
+            <h2 class="font-serif text-3xl md:text-4xl text-wedding-gold mb-3">Rubén & Damarys</h2>
+            
             <h2 class="section-title font-serif text-wedding-navy mb-4 px-2">Shhh... ¡Es una Sorpresa!</h2>
             <p class="text-base md:text-lg text-gray-700 leading-relaxed px-4">
                 Acompáñanos a celebrar el amor en una boda sorpresa inolvidable. 
